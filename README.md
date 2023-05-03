@@ -1,1 +1,1 @@
-# stochastic_modeling_PaSR
+# Stochastic Modeling of Partially Stirred Reactor (PaSR)
