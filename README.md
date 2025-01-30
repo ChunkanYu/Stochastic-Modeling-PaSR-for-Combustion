@@ -1,2 +1,12 @@
 # Stochastic Modeling of Partially Stirred Reactor (PaSR)
-The \emph{PaSR4Comb} code is used to Turbulence-Chemistry Interaction for combustion system. 
+The _PaSR4Comb_ code is used to Turbulence-Chemistry Interaction for combustion system. 
+
+
+## Numerical Implementation
+### Mixing model
++ IEM
++ MCM
++ MMC
+
+
+
