@@ -3,11 +3,11 @@ The _PaSR4Comb_ code is used to Turbulence-Chemistry Interaction for combustion 
 
 
 ## Numerical Implementation
-### Through-flow
+#### Through-flow
 ```math
 N_\text{replaced} = N_p \cdot \frac{\Delta t}{\tau_\text{res}}
 ```
-### Molecular mixing process 
+#### Molecular mixing process 
 + IEM
 ```math
 \frac{\text{d} \phi^{(k)}}{\text{d} t} = - \frac{1}{2} C_\phi \omega_\text{mix} \cdot ( \phi^{(k)} - \langle \phi \rangle )
@@ -24,8 +24,11 @@ N_\text{replaced} = N_p \cdot \frac{\Delta t}{\tau_\text{res}}
 > [!NOTE]
 > The MMC mixing model will be updated soon.The block for MMC is still not be tested intensively.
 
-### Chemical reaction process
+#### Chemical reaction process
 
 ```math
 \frac{\text{d}\phi^{(k)}}{\text{d}t}=\mathcal{R}(\phi^{(k)}),
 ```
+
+## Other models in _PaSR4Comb_ Code
+#
