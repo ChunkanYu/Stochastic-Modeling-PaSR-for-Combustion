@@ -24,11 +24,15 @@ N_\text{replaced} = N_p \cdot \frac{\Delta t}{\tau_\text{res}}
 > [!NOTE]
 > The MMC mixing model will be updated soon.The block for MMC is still not be tested intensively.
 
-#### Chemical reaction process
+#### Chemical reaction process (detailed chemistry)
 
 ```math
 \frac{\text{d}\phi^{(k)}}{\text{d}t}=\mathcal{R}(\phi^{(k)}),
 ```
 
-## Other models in _PaSR4Comb_ Code
-#
+## Chemistry models in _PaSR4Comb_ Code
+#### Quasi-steady state assumption (_QSSA_)
+
+#### Virtual chemistry (_VC_)
+> [!WARNING]
+> in progress
