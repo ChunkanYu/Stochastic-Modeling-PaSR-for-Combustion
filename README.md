@@ -16,5 +16,5 @@ The _PaSR4Comb_ code is used to Turbulence-Chemistry Interaction for combustion 
 ### Chemical reaction process
 
 ```math
-\frac{\text{d}\vec{phi}^{(k)}}{\text{d}t}=\mathcal{R}(\vec{phi}^{(k)}),
+\frac{\text{d}\vec{\phi}^{(k)}}{\text{d}t}=\mathcal{R}(\vec{\phi}^{(k)}),
 ```
