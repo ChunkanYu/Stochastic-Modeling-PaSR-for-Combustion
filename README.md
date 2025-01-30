@@ -10,11 +10,11 @@ N_\text{replaced} = N_p \cdot \frac{\Delta t}{\tau_\text{res}}
 ### Molecular mixing process 
 + IEM
 ```math
-\frac{\text{d} \Vec{\phi}^{(k)}}{\text{d} t} = - \frac{1}{2} C_\phi \omega_\text{mix} \cdot ( \Vec{\phi}^{(k)} - \langle \Vec{\phi} \rangle )
+\frac{\text{d} \phi^{(k)}}{\text{d} t} = - \frac{1}{2} C_\phi \omega_\text{mix} \cdot ( \phi^{(k)} - \langle \phi \rangle )
 ```
 
 ```math
-\vec{\phi}^{(k)}_\text{new} = \langle \Vec{\phi} \rangle + \left( \vec{\phi}^{(k)} - \langle \Vec{\phi} \rangle \right) \cdot \exp{\left(-\frac{1}{2} C_\phi \omega_\text{mix} \Delta t \right) }
+\phi^{(k)}_\text{new} = \langle \phi \rangle + \left( \phi^{(k)} - \langle \phi \rangle \right) \cdot \exp{\left(-\frac{1}{2} C_\phi \omega_\text{mix} \Delta t \right) }
 ```
 
 
@@ -27,5 +27,5 @@ N_\text{replaced} = N_p \cdot \frac{\Delta t}{\tau_\text{res}}
 ### Chemical reaction process
 
 ```math
-\frac{\text{d}\Vec{\phi}^{(k)}}{\text{d}t}=\mathcal{R}(\vec{\phi}^{(k)}),
+\frac{\text{d}\phi^{(k)}}{\text{d}t}=\mathcal{R}(\phi^{(k)}),
 ```
