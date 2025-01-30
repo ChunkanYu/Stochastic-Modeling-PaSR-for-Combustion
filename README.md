@@ -3,7 +3,9 @@ The _PaSR4Comb_ code is used to Turbulence-Chemistry Interaction for combustion 
 
 
 ## Numerical Implementation
-### Mixing model
+### Through-flow
+
+### Molecular mixing process 
 + IEM
 + MCM
 + MMC
@@ -11,3 +13,8 @@ The _PaSR4Comb_ code is used to Turbulence-Chemistry Interaction for combustion 
 > [!NOTE]
 > The MMC mixing model will be updated soon.The block for MMC is still not be tested intensively.
 
+### Chemical reaction process
+
+```math
+\frac{\text{d}\phi}{\text{d}t}=\mathcal{R}(\phi),
+```
