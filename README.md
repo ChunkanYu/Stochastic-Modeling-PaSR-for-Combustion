@@ -1,4 +1,4 @@
-# Stochastic Modeling of Partially Stirred Reactor (PaSR)
+# Stochastic Modeling of Partially Stirred Reactor (_PaSR4Comb_)
 The _PaSR4Comb_ code is used to Turbulence-Chemistry Interaction for combustion system. 
 
 
@@ -30,8 +30,22 @@ N_\text{replaced} = N_p \cdot \frac{\Delta t}{\tau_\text{res}}
 \frac{\text{d}\phi^{(k)}}{\text{d}t}=\mathcal{R}(\phi^{(k)}),
 ```
 
-## Chemistry models in _PaSR4Comb_ Code
+## Chemistry models
 #### Quasi-steady state assumption (_QSSA_)
+
+The simulation based on the GQL reduced chemistry is to solve the DAE system [2]:
+
+```math
+\textbf{Q}_s \frac{\text{d}\phi}{\text{d}t}=R(\phi),
+```
+where $\textbf{M}_s$ is the mass matrix defined as:
+
+```math
+\textbf{Q}_s = \begin{pmatrix}
+                  1 ~ 0 \\
+                  0 ~ 1
+                  \end{pmatrix},
+```
 
 #### Virtual chemistry (_VC_)
 > [!WARNING]
