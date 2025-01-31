@@ -1,4 +1,4 @@
-function [State_particles,RefVar_particles]=evolution_mixing_process_detailed_chemistry(mixing_model_type,...
+function [State_particles,RefVar_particles]=evolution_mixing_process(mixing_model_type,...
     State_particles, RefVar_particles,mixing_model_parameter,omega_turb,dt)
 
 switch mixing_model_type
@@ -8,9 +8,6 @@ switch mixing_model_type
     case 'MCM'
         [State_particles]=evolution_mixing_process_MCM(State_particles,...
             mixing_model_parameter,omega_turb,dt);
-    case 'MMC_IEM_Varna'
-        [State_particles,RefVar_particles]=evolution_mixing_process_MMC_IEM_Varna(State_particles,...
-            RefVar_particles,mixing_model_parameter,omega_turb,dt);
     case 'MMC_MCM_Sundaram'
         [State_particles,RefVar_particles]=evolution_mixing_process_MMC_MCM_Sundaram(State_particles,...
             RefVar_particles,mixing_model_parameter,omega_turb,dt);
@@ -67,57 +64,6 @@ for i = 1 : mix_num
             MCM_extent * mean_Psi_particles_selected;
     end
 end
-
-end
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% MMC - IEM - Varna
-function [Psi_particles,RefVar_particles]=evolution_mixing_process_MMC_IEM_Varna(Psi_particles,...
-    RefVar_particles,mixing_model_parameter,omega_turb,dt)
-
-C_min = mixing_model_parameter.C_min;
-
-% reference variable
-Np = size(RefVar_particles,2);
-
-C_RefVar = mixing_model_parameter.C_RefVar;
-
-b0=mixing_model_parameter.b0;
-
-RefVar_mean = sum(RefVar_particles,2)/Np;
-
-RefVar_variance = sum((RefVar_particles - RefVar_mean).^2,2)/Np;
-
-
-% Ornstein-Uhlenbeck process
-for i = 1 : Np
-    RefVar_particles(i) = RefVar_mean + ...
-        (RefVar_particles(i)-RefVar_mean)*exp(-C_RefVar*omega_turb*dt) +...
-        b0 * sqrt(2*omega_turb*C_RefVar*RefVar_variance) * sqrt(dt) * randn(1);
-end
-
-% mixing based on reference variable
-
-[~,ind] = sort(RefVar_particles);
-
-Np = (size(Psi_particles,2))/2;
-
-for i = 1 : Np
-    %
-    if i == 1
-        Psi_conditional_mean = (Psi_particles(:,ind(1)) + Psi_particles(:,ind(2)))/2;
-    elseif i == Np
-        Psi_conditional_mean = (Psi_particles(:,ind(Np-1)) + Psi_particles(:,ind(Np)))/2;
-    else
-        Psi_conditional_mean = (Psi_particles(:,ind(i-1)) + Psi_particles(:,ind(i+1)))/2;
-    end
-    %
-    Psi_particles(:,ind(i)) = Psi_conditional_mean + ...
-        (Psi_particles(:,i)-Psi_conditional_mean)*exp(-C_min*omega_turb*dt);
-
-end
-
-
 
 end
 
