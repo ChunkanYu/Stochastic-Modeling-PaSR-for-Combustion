@@ -31,8 +31,6 @@ spark_ignition.condition = false;
 spark_ignition.qs_volumetric = 6e8;
 spark_ignition.spark_duration_time = 1e-3;
 
-% set-up block for surface reaction
-surface_reaction.condition = false;
 
 % set-up block for DAE reduced chemistry (e.g. QSSA, GQL)
 reduced_chemistry.condition = false;
@@ -40,7 +38,7 @@ reduced_chemistry.chemistry='QSSA_chemistry'; %
 QSS_species={'OH'};
 
 % set-up block for CRN / pre-chamber
-prechamber.condition = true;
+prechamber.condition = false;
 prechamber.reactor_time = 1e6;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -58,7 +56,6 @@ mw = molecularWeights(gas);
 if true(prechamber.condition)
   [w_species_SS,Temperature_SS] = homogeneous_reactor(Psi_unburnt,gas,prechamber.reactor_time);
 end
-fdgd
 
 [Psi_eq, T_eq]=get_equilibrium_state(gas);
 
@@ -123,14 +120,14 @@ for n = 1: 1e5
     % end
     % mixing process
     % omega_turb = (2e4-1e3).*rand(1,1) + 1e3;
-    [State_particles,RefVar_particles]=evolution_mixing_process_detailed_chemistry(mixing_model_type,...
+    [State_particles,RefVar_particles]=evolution_mixing_process(mixing_model_type,...
         State_particles, RefVar_particles,mixing_model_parameter,omega_turb,dt);
     % reaction process
     if true(spark_ignition.condition)
         spark_ignition.time = (n-1) * dt;
     end
-    [State_particles] = evolution_reaction_process_detailed_chemistry(gas,State_particles,dt,...
-        radiation,spark_ignition,surface_reaction,reduced_chemistry);
+    [State_particles] = evolution_reaction_process(gas,State_particles,dt,...
+        radiation,spark_ignition,reduced_chemistry);
 
     %
 
