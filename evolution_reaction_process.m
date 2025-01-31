@@ -1,5 +1,5 @@
 function [State_particles_new] = evolution_reaction_process(gas,State_particles,dt,...
-    radiation,spark_ignition,surface_reaction,reduced_chemistry)
+    radiation,spark_ignition,reduced_chemistry)
 
 Np = size(State_particles,2);
 
@@ -18,7 +18,7 @@ for iNp = 1 : Np
     else
         options = odeset('RelTol',1.e-8,'AbsTol',1.e-10);
     end
-    out = ode15s(@conhp,[0 dt],Psi_0,options,gas,radiation,spark_ignition,surface_reaction);
+    out = ode15s(@conhp,[0 dt],Psi_0,options,gas,radiation,spark_ignition);
     %
     set(gas, 'Temperature', out.y(1,end), 'Pressure', out.y(2,end),...
         'MassFractions',out.y(3:end,end));
@@ -30,7 +30,7 @@ end
 
 end
 
-function F = conhp(t,Psi,gas,radiation,spark_ignition,surface_reaction)
+function F = conhp(t,Psi,gas,radiation,spark_ignition)
 
 % Set the state of the gas, based on the current solution vector.
 setMassFractions(gas, Psi(3:end,1), 'nonorm');
@@ -42,24 +42,6 @@ mw = molecularWeights(gas);
 % energy equation
 omega_dot = netProdRates(gas);
 
-% surface reaction
-if true(surface_reaction.condition)
-    cl = density(gas) * (Psi(3:end,:) ./ mw); % !!!!!!!!!!!!!!!! check !!!!!!!!!!!!!!!!!!!
-    Zl = (0.25*sqrt(8*gasconstant*Psi(1,1)/pi)) * (cl./sqrt(1e-3*mw));
-    ioh = speciesIndex(gas,'OH'); io = speciesIndex(gas,'O'); ih = speciesIndex(gas,'H');
-    io2 = speciesIndex(gas,'O2'); ih2 = speciesIndex(gas,'H2');
-    ih2o = speciesIndex(gas,'H2O'); ih2o2 = speciesIndex(gas,'H2O2'); iho2 = speciesIndex(gas,'HO2');
-    gamma_1 = 6.3e-4*exp(-7.15e3/gasconstant/Psi(1,1));
-    gamma_2 = 4.6e-2*exp(-23.6e3/gasconstant/Psi(1,1));
-    omega_dot_surface = 0 * omega_dot;
-    omega_dot_surface(iho2) = -gamma_1*Zl(iho2);
-    omega_dot_surface(ih2o) = 0.5*gamma_1*Zl(iho2)+0.5*gamma_1*Zl(ioh)+gamma_1*Zl(ih2o2);
-    omega_dot_surface(ih2o2) = -gamma_1*Zl(ih2o2); omega_dot_surface(ioh) = -gamma_1*Zl(ioh);
-    omega_dot_surface(ih) = -gamma_2*Zl(ih); omega_dot_surface(ih2) = 0.5*gamma_2*Zl(ih);
-    omega_dot_surface(io) = -gamma_1*Zl(io);
-    omega_dot_surface(io2) = 0.75*gamma_1*Zl(iho2)+0.5*gamma_1*Zl(io)+0.25*gamma_1*Zl(ioh)+0.5*gamma_1*Zl(ih2o2);
-    omega_dot = omega_dot + omega_dot_surface;
-end
 %%%%%%%%%%%%%%%%%
 T_dot = - temperature(gas) * gasconstant * enthalpies_RT(gas)' ...
     * omega_dot / (density(gas)*cp_mass(gas));
