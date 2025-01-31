@@ -1,6 +1,13 @@
 # Stochastic Modeling of Partially Stirred Reactor (_PaSR4Comb_)
 The _PaSR4Comb_ code is used to Turbulence-Chemistry Interaction for combustion system. 
 
+## Stochastic modeling
+
+```math
+    \frac{\partial \widetilde{f}_{\phi}(\psi,t)}{\partial t}  =  
+    +  \frac{1}{\tau_\text{res}} \bigl\{ \widetilde{f}_{\phi,\text{inlet}}(\psi,t) - \widetilde{f}_{\phi}(\psi,t) \bigr\}
+    - \sum_{\alpha=1}^{n_s+2} \frac{\partial}{\partial \psi_\alpha} \bigl\{ R_\alpha (\Vec{\psi}) \cdot \widetilde{f}_{\phi}(\psi,t) \bigr\} - \sum_{\alpha=1, \beta=1}^{n_s+2} \frac{\partial^2}{\partial \psi_\alpha \psi_\beta} \bigl\{ \langle \varepsilon_{\alpha \beta} | \phi = \psi \rangle \widetilde{f}_{\phi}(\psi,t) \bigr\}
+```
 
 ## Numerical Implementation
 #### Through-flow
