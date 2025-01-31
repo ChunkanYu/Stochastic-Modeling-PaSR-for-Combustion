@@ -62,5 +62,5 @@ where $\textbf{M}_s$ is the mass matrix defined as:
 > [!WARNING]
 > in progress
 
-## References:
+## References
 [1] Chen, J-Y. "Stochastic modeling of partially stirred reactors." Combustion science and technology 122.1-6 (1997): 63-94.
