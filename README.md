@@ -2,7 +2,11 @@
 The _PaSR4Comb_ code is used to Turbulence-Chemistry Interaction for combustion system. 
 
 ## Stochastic modeling
-
+Suppose the thermo-kinetic state vector $\phi$ consists of enthalpy $h$, pressure $p$ and mass fraction $Y_i$ of $n_s$ species:
+```math
+\phi = \left( h,p,Y_1,Y_2,\cdots, Y_i,\cdots,Y_{n_{s}-1},Y_{n_{s}} \right)^\text{T},
+```
+then the stochastic modeling of the PaSR can be achieved by solving the transport equation for the joint Probability Density Function (PDF) as [1]
 ```math
     \frac{\partial \widetilde{f}_{\phi}(\psi,t)}{\partial t}  =  
     +  \frac{1}{\tau_\text{res}} \bigl\{ \widetilde{f}_{\phi,\text{inlet}}(\psi,t) - \widetilde{f}_{\phi}(\psi,t) \bigr\}
@@ -40,7 +44,7 @@ N_\text{replaced} = N_p \cdot \frac{\Delta t}{\tau_\text{res}}
 ## Chemistry models
 #### Quasi-steady state assumption (_QSSA_)
 
-The simulation based on the GQL reduced chemistry is to solve the DAE system [2]:
+The simulation based on the GQL reduced chemistry is to solve the DAE system:
 
 ```math
 \textbf{Q}_s \frac{\text{d}\phi}{\text{d}t}=R(\phi),
@@ -57,3 +61,6 @@ where $\textbf{M}_s$ is the mass matrix defined as:
 #### Virtual chemistry (_VC_)
 > [!WARNING]
 > in progress
+
+## References:
+[1] Chen, J-Y. "Stochastic modeling of partially stirred reactors." Combustion science and technology 122.1-6 (1997): 63-94.
