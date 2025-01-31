@@ -8,8 +8,6 @@ Phi = 1.0; % fuel/air equivalent ratio
 alpha_h = 0.3; % hydrogen content in NH3-H2-mixture
 
 C_phi = 2.0; % mixing model parameter
-% the following for MMC-IEM-Varna
-C_RefVar = 2.0; b0 = 0.71; C_min = 8.0;
 % the following for MMC-MCM-Sundaram
 L = 0.1; lambda = 0.1;
 
@@ -71,12 +69,6 @@ RefVar_particles = zeros(1,Np);
 
 
 switch mixing_model_type
-    case 'MMC_IEM_Varna'
-        RefVar_particles = ones(1,Np);
-        mixing_model_parameter.C_RefVar = C_RefVar;
-        mixing_model_parameter.b0 = b0;
-        mixing_model_parameter.C_min = C_min;
-
     case 'MMC_MCM_Sundaram'
         RefVar_particles = 0 + (L - 0)*rand(1,Np);
         mixing_model_parameter.lambda = lambda;
